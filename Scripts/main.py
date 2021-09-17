@@ -78,7 +78,7 @@ def finVizEngine(input,output):
                     searchbutton.click()
                     driver.implicitly_wait(5)
                     #--- New Additions---
-                    Index = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[1]/td[2]/b/small').text
+                    Index = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[1]/td[2]/b').text
                     Cashsh = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[6]/td[2]/b').text
                     Recom = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[12]/td[2]/b').text
                     PEG = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[3]/td[4]/b').text
