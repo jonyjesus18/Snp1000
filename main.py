@@ -11,7 +11,12 @@ import pandas as pd
 https://selenium-python.readthedocs.io/getting-started.html
 '''
 
-driver = webdriver.Chrome()
+#driver = webdriver.Chrome()
+
+options = webdriver.ChromeOptions()
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
+driver = webdriver.Chrome(options=options)
+
 url = 'https://stockanalysis.com/ipos/2020/'
 yahoo = 'https://uk.finance.yahoo.com/'
 finVizz = 'https://finviz.com/'
@@ -57,11 +62,11 @@ def finVizEngine(input,output):
         csv_reader = reader(IPO_List)
         with open(output, 'a') as dataframe:
             writer = csv.writer(dataframe)
-            HEADER = ['Ticker', 'MarketCap', 'Income', 'Sales', 'Booksh', 'Dividend',
-                      'Dividend_Percentage', 'Employees', 'PriceToEarnings', 'ForwardPTE',
-                      'PriceToSales', 'PriceToBook', 'PutCallRatio', 'QuickRatio', 'CurrentRatio', 'DebtEquity',
-                      'ROA', 'ROE', 'ROI', 'GrossMargin', 'OperationalMargin', 'ProfitMargin', 'Payout',
-                      'SHSOutstanding', 'ShsFloat', 'ShoartFloat', 'ShortRatio', 'TargetPrice', 'PerformaceHalfYear',
+            HEADER = ['Ticker','Index' 'MarketCap', 'Income', 'Sales', 'Booksh','Cashsh', 'Dividend',
+                      'Dividend_Percentage', 'Employees','Recom', 'PriceToEarnings', 'ForwardPTE','PEG'
+                      'PriceToSales', 'PriceToBook', 'PutCallRatio','PFCF', 'QuickRatio', 'CurrentRatio', 'DebtEquity','LdDebtEquity',
+                      'SMA20','SMA50','SMA200','ROA', 'ROE', 'ROI', 'GrossMargin', 'OperationalMargin', 'ProfitMargin', 'Payout',
+                      'SHSOutstanding', 'ShsFloat', 'ShoartFloat', 'ShortRatio', 'TargetPrice','52WH','52WL','AVGVol','Vol', 'PerformaceHalfYear',
                       'PerformanceYear', 'PerformanceYTD']
             writer.writerow(HEADER)
             for IPO in csv_reader:
@@ -72,6 +77,20 @@ def finVizEngine(input,output):
                     searchbox.send_keys(IPO)
                     searchbutton.click()
                     driver.implicitly_wait(5)
+                    #--- New Additions---
+                    Index = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[1]/td[2]/b/small').text
+                    Cashsh = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[6]/td[2]/b').text
+                    Recom = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[12]/td[2]/b').text
+                    PEG = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[3]/td[4]/b').text
+                    PFCF = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[7]/td[4]/b').text
+                    LdDebtEquity = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[11]/td[4]/b').text
+                    SMA20 = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[12]/td[4]/b').text
+                    SMA50 = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[12]/td[6]/b').text
+                    SMA200 = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[12]/td[8]/b').text
+                    Wl52 = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[8]/td[10]/b').text
+                    Wh52 = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[7]/td[10]/b').text
+                    AvgVol = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[11]/td[10]/b').text
+                    Vol = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[12]/td[10]/b').text
                     # ----------------------------
                     MarketCap = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[2]/td[2]/b').text
                     Income = driver.find_element_by_xpath('/html/body/div[4]/div/table[2]/tbody/tr[3]/td[2]/b').text
@@ -121,11 +140,12 @@ def finVizEngine(input,output):
                     PerformanceYTD = driver.find_element_by_xpath(
                         '/html/body/div[4]/div/table[2]/tbody/tr[6]/td[12]/b').text
                     # ----------------------------
-                    INSERT = [IPO, MarketCap, Income, Sales, Booksh, Dividend,
-                              Dividend_Percentage, Employees, PriceToEarnings, ForwardPTE,
-                              PriceToSales, PriceToBook, PutCallRatio, QuickRatio, CurrentRatio, DebtEquity,
+
+                    INSERT = [IPO, Index, MarketCap, Income, Sales, Booksh,Cashsh, Dividend,
+                              Dividend_Percentage, Employees,Recom, PriceToEarnings, ForwardPTE,PEG,
+                              PriceToSales, PriceToBook, PutCallRatio,PFCF, QuickRatio, CurrentRatio, DebtEquity,LdDebtEquity,SMA20,SMA50,SMA200,
                               ROA, ROE, ROI, GrossMargin, OperationalMargin, ProfitMargin, Payout,
-                              SHSOutstanding, ShsFloat, ShoartFloat, ShortRatio, TargetPrice, PerformaceHalfYear,
+                              SHSOutstanding, ShsFloat, ShoartFloat, ShortRatio, TargetPrice,Wh52,Wl52,AvgVol,Vol, PerformaceHalfYear,
                               PerformanceYear, PerformanceYTD]
                     print(INSERT)
                     dataframe.write(str(INSERT) + '\n')
@@ -140,16 +160,16 @@ def finVizEngine(input,output):
 
 def cleanFinVizData(csv):
     pd.set_option('display.max_columns', None)
-    data = pd.read_csv('IPO_data.csv')
+    data = pd.read_csv(csv)
     data = data.dropna()
     data = data.replace("'", '', regex=True)
     data = data.replace(" ", '', regex=True)
-    list1 = ['IPO', 'MarketCap', 'Income', 'Sales', 'Booksh', 'Dividend',
-             'Dividend_Percentage', 'Employees', 'PriceToEarnings', 'ForwardPTE',
-             'PriceToSales', 'PriceToBook', 'PutCallRatio', 'QuickRatio', 'CurrentRatio', 'DebtEquity',
-             'SHSOutstanding', 'ShsFloat', 'ShortRatio', 'TargetPrice',
-             'ROI', 'ROE', 'ROA', 'GrossMargin', 'OperationalMargin', 'ProfitMargin',
-             'ShoartFloat', 'PerformaceHalfYear', 'PerformanceYear', 'PerformanceYTD', 'Payout']
+    list1 = ['Ticker','Index' 'MarketCap', 'Income', 'Sales', 'Booksh','Cashsh', 'Dividend',
+                      'Dividend_Percentage', 'Employees','Recom', 'PriceToEarnings', 'ForwardPTE','PEG'
+                      'PriceToSales', 'PriceToBook', 'PutCallRatio','PFCF', 'QuickRatio', 'CurrentRatio', 'DebtEquity','LdDebtEquity',
+                      'SMA20','SMA50','SMA200','ROA', 'ROE', 'ROI', 'GrossMargin', 'OperationalMargin', 'ProfitMargin', 'Payout',
+                      'SHSOutstanding', 'ShsFloat', 'ShoartFloat', 'ShortRatio', 'TargetPrice','52WH','52WL','AVGVol','Vol', 'PerformaceHalfYear',
+                      'PerformanceYear', 'PerformanceYTD']
 
     list2 = ['MarketCap', 'Income', 'Sales',
              'SHSOutstanding', 'ShsFloat']
@@ -190,8 +210,7 @@ def cleanFinVizData(csv):
     data = data.sort_values(by=['PerformanceYTD(%)'], ascending=False)
     return data
 
-finVizEngine('SnP1000_TICKR.csv','SnP1000_DATA,csv')
+finVizEngine('SnP1000_TICKR.csv','SnP1000_DATA.csv')
 data = cleanFinVizData('SnP1000_DATA.csv')
-data.to_csv('SnP1000_DATA.csv', index=False)
+data.to_csv('SnP1000_DATA_Clean.csv', index=False)
 
-#NEW CHANGES!!!!!!!!!!
