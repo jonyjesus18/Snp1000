@@ -210,7 +210,7 @@ def cleanFinVizData(csv):
     data = data.sort_values(by=['PerformanceYTD(%)'], ascending=False)
     return data
 
-finVizEngine('SnP1000_TICKR.csv','SnP1000_DATA.csv')
+finVizEngine('Scripts\SnP1000_TICKR.csv','SnP1000_DATA.csv')
 data = cleanFinVizData('SnP1000_DATA.csv')
 data.to_csv('SnP1000_DATA_Clean.csv', index=False)
 
