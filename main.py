@@ -194,4 +194,3 @@ finVizEngine('SnP1000_TICKR.csv','SnP1000_DATA,csv')
 data = cleanFinVizData('SnP1000_DATA.csv')
 data.to_csv('SnP1000_DATA.csv', index=False)
 
-#TEST2
