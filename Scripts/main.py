@@ -48,7 +48,7 @@ def openYahoo():
 
 
 def openFinViz():
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(executable_path = r"C:\Users\joaom\OneDrive\Documentos\GitHub\Snp1000\Scripts\chromedriver.exe")
     driver.get(finVizz)
     driver.implicitly_wait(10)
     read_more_button = driver.find_element_by_xpath('/html/body/div[11]/div[1]/div[3]/button')
