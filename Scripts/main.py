@@ -65,7 +65,7 @@ def finVizEngine(input,output):
         csv_reader = reader(IPO_List)
         with open(output, 'a') as dataframe:
             writer = csv.writer(dataframe)
-            HEADER = ['Ticker','Index' 'MarketCap', 'Income', 'Sales', 'Booksh','Cashsh', 'Dividend',
+            HEADER = ['Ticker','Index', 'MarketCap', 'Income', 'Sales', 'Booksh','Cashsh', 'Dividend',
                       'Dividend_Percentage', 'Employees','Recom', 'PriceToEarnings', 'ForwardPTE','PEG'
                       'PriceToSales', 'PriceToBook', 'PutCallRatio','PFCF', 'QuickRatio', 'CurrentRatio', 'DebtEquity','LdDebtEquity',
                       'SMA20','SMA50','SMA200','ROA', 'ROE', 'ROI', 'GrossMargin', 'OperationalMargin', 'ProfitMargin', 'Payout',
@@ -168,7 +168,7 @@ def cleanFinVizData(csv):
     data = data.dropna()
     data = data.replace("'", '', regex=True)
     data = data.replace(" ", '', regex=True)
-    list1 = ['Ticker','Index' 'MarketCap', 'Income', 'Sales', 'Booksh','Cashsh', 'Dividend',
+    list1 = ['Ticker','Index', 'MarketCap', 'Income', 'Sales', 'Booksh','Cashsh', 'Dividend',
                       'Dividend_Percentage', 'Employees','Recom', 'PriceToEarnings', 'ForwardPTE','PEG'
                       'PriceToSales', 'PriceToBook', 'PutCallRatio','PFCF', 'QuickRatio', 'CurrentRatio', 'DebtEquity','LdDebtEquity',
                       'SMA20','SMA50','SMA200','ROA', 'ROE', 'ROI', 'GrossMargin', 'OperationalMargin', 'ProfitMargin', 'Payout',
@@ -214,7 +214,7 @@ def cleanFinVizData(csv):
     data = data.sort_values(by=['PerformanceYTD(%)'], ascending=False)
     return data
 
-#finVizEngine('SnP1000_TICKR.csv','SnP1000_DATA.csv')
-data = cleanFinVizData('scripts/SnP1000_DATA.csv')
-data.to_csv('SnP1000_DATA_Clean.csv', index=False)
+finVizEngine('SnP1000_TICKR.csv','SnP1000_DATA.csv')
+#data = cleanFinVizData('scripts/SnP1000_DATA.csv')
+#data.to_csv('SnP1000_DATA_Clean.csv', index=False)
 
