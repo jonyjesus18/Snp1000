@@ -65,7 +65,7 @@ def finVizEngine(input,output):
                                       # and if it doesn't exist, download it automatically,
                                       # then add chromedriver to path
 
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(executable_path=r'C:\Users\joaom\OneDrive\Documentos\GitHub\Snp1000\Scripts\chromedriver.exe')
     ipo_df = pd.DataFrame({})
     openFinViz()
     with open(input, 'r') as IPO_List:
@@ -158,7 +158,6 @@ def finVizEngine(input,output):
                               SHSOutstanding, ShsFloat, ShoartFloat, ShortRatio, TargetPrice,Wh52,Wl52,AvgVol,Vol, PerformaceHalfYear,
                               PerformanceYear, PerformanceYTD]
                     print(INSERT)
-                    print(1)
                     dataframe.write(str(INSERT) + '\n')
                 except:
                     try:
