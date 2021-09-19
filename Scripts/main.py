@@ -11,7 +11,7 @@ import pandas as pd
 https://selenium-python.readthedocs.io/getting-started.html
 '''
 
-driver = webdriver.Chrome()
+
 
 # options = webdriver.ChromeOptions()
 # options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -42,11 +42,13 @@ def get_tickr(url):
 
 
 def openYahoo():
+    driver = webdriver.Chrome()
     init_button = driver.find_element_by_name('agree')
     init_button.click()
 
 
 def openFinViz():
+    driver = webdriver.Chrome()
     driver.get(finVizz)
     driver.implicitly_wait(10)
     read_more_button = driver.find_element_by_xpath('/html/body/div[11]/div[1]/div[3]/button')
@@ -56,6 +58,7 @@ def openFinViz():
 
 
 def finVizEngine(input,output):
+    driver = webdriver.Chrome()
     ipo_df = pd.DataFrame({})
     openFinViz()
     with open(input, 'r') as IPO_List:
@@ -212,6 +215,6 @@ def cleanFinVizData(csv):
     return data
 
 #finVizEngine('SnP1000_TICKR.csv','SnP1000_DATA.csv')
-data = cleanFinVizData('SnP1000_DATA.csv')
+data = cleanFinVizData('scripts/SnP1000_DATA.csv')
 data.to_csv('SnP1000_DATA_Clean.csv', index=False)
 
