@@ -58,12 +58,12 @@ def openFinViz():
 
 
 def finVizEngine(input,output):
-    #import chromedriver_autoinstaller
-    #chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
+    import chromedriver_autoinstaller
+    chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
                                       # and if it doesn't exist, download it automatically,
                                       # then add chromedriver to path
 
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(r'C:\Users\joaom\OneDrive\Documentos\GitHub\Snp1000\Scripts\chromedriver.exe')
     ipo_df = pd.DataFrame({})
     openFinViz()
     with open(input, 'r') as IPO_List:
