@@ -80,18 +80,18 @@ def finVizEngine(input,output):
         with open(output, 'a') as dataframe:
             writer = csv.writer(dataframe)
             HEADER = ['Ticker','Index', 'MarketCap', 'Income', 'Sales', 'Booksh','Cashsh', 'Dividend',
-                      'Dividend_Percentage', 'Employees','Recom', 'PriceToEarnings', 'ForwardPTE','PEG'
+                      'Dividend_Percentage', 'Employees','Recom', 'PriceToEarnings', 'ForwardPTE','PEG',
                       'PriceToSales', 'PriceToBook', 'PutCallRatio','PFCF', 'QuickRatio', 'CurrentRatio', 'DebtEquity','LdDebtEquity',
                       'SMA20','SMA50','SMA200','ROA', 'ROE', 'ROI', 'GrossMargin', 'OperationalMargin', 'ProfitMargin', 'Payout',
                       'SHSOutstanding', 'ShsFloat', 'ShoartFloat', 'ShortRatio', 'TargetPrice','52WH','52WL','AVGVol','Vol', 'PerformaceHalfYear',
                       'PerformanceYear', 'PerformanceYTD']
             writer.writerow(HEADER)
-            for IPO in csv_reader:
+            for Ticker in csv_reader:
                 try:
                     searchbox = driver.find_element_by_xpath('//*[@id="search"]/div/form/input')
                     searchbutton = driver.find_element_by_xpath('//*[@id="search"]/div/form/span')
                     searchbox.click()
-                    searchbox.send_keys(IPO)
+                    searchbox.send_keys(Ticker)
                     searchbutton.click()
                     driver.implicitly_wait(5)
                     #--- New Additions---
@@ -157,13 +157,18 @@ def finVizEngine(input,output):
                     PerformanceYTD = driver.find_element_by_xpath(
                         '/html/body/div[4]/div/table[2]/tbody/tr[6]/td[12]/b').text
                     # ----------------------------
-
-                    INSERT = [IPO, Index, MarketCap, Income, Sales, Booksh,Cashsh, Dividend,
-                              Dividend_Percentage, Employees,Recom, PriceToEarnings, ForwardPTE,PEG,
-                              PriceToSales, PriceToBook, PutCallRatio,PFCF, QuickRatio, CurrentRatio, DebtEquity,LdDebtEquity,SMA20,SMA50,SMA200,
-                              ROA, ROE, ROI, GrossMargin, OperationalMargin, ProfitMargin, Payout,
-                              SHSOutstanding, ShsFloat, ShoartFloat, ShortRatio, TargetPrice,Wh52,Wl52,AvgVol,Vol, PerformaceHalfYear,
-                              PerformanceYear, PerformanceYTD]
+                    HEADER = ['Ticker','Index', 'MarketCap', 'Income', 'Sales', 'Booksh','Cashsh', 'Dividend',
+                      'Dividend_Percentage', 'Employees','Recom', 'PriceToEarnings', 'ForwardPTE','PEG',
+                      'PriceToSales', 'PriceToBook', 'PutCallRatio','PFCF', 'QuickRatio', 'CurrentRatio', 'DebtEquity','LdDebtEquity',
+                      'SMA20','SMA50','SMA200','ROA', 'ROE', 'ROI', 'GrossMargin', 'OperationalMargin', 'ProfitMargin', 'Payout',
+                      'SHSOutstanding', 'ShsFloat', 'ShoartFloat', 'ShortRatio', 'TargetPrice','52WH','52WL','AVGVol','Vol', 'PerformaceHalfYear',
+                      'PerformanceYear', 'PerformanceYTD']
+                    INSERT = [Ticker,Index, MarketCap, Income, Sales, Booksh,Cashsh, Dividend,
+                      Dividend_Percentage, Employees,Recom, PriceToEarnings, ForwardPTE,PEG,
+                      PriceToSales, PriceToBook, PutCallRatio,PFCF, QuickRatio, CurrentRatio, DebtEquity,LdDebtEquity,
+                      SMA20,SMA50,SMA200,ROA, ROE, ROI, GrossMargin, OperationalMargin, ProfitMargin, Payout,
+                      SHSOutstanding, ShsFloat, ShoartFloat, ShortRatio, TargetPrice,Wh52,Wl52,AvgVol,Vol, PerformaceHalfYear,
+                      PerformanceYear, PerformanceYTD]
                     print(INSERT)
                     dataframe.write(str(INSERT) + '\n')
                 except:
