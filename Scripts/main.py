@@ -58,14 +58,23 @@ def openFinViz():
 
 
 def finVizEngine(input,output):
-    #import chromedriver_autoinstaller
-    #chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
+    import chromedriver_autoinstaller
+    chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
                                       # and if it doesn't exist, download it automatically,
                                       # then add chromedriver to path
 
-    driver = webdriver.Chrome(r'C:\Users\joaom\OneDrive\Documentos\GitHub\Snp1000\Scripts\chromedriver.exe')
+    #driver = webdriver.Chrome(r'C:\Users\joaom\OneDrive\Documentos\GitHub\Snp1000\Scripts\chromedriver.exe')
+    driver = webdriver.Chrome()
     ipo_df = pd.DataFrame({})
-    openFinViz()
+    #----------------
+    #driver = webdriver.Chrome(executable_path = r"C:\Users\joaom\OneDrive\Documentos\GitHub\Snp1000\Scripts\chromedriver.exe")
+    driver.get(finVizz)
+    driver.implicitly_wait(10)
+    read_more_button = driver.find_element_by_xpath('/html/body/div[11]/div[1]/div[3]/button')
+    read_more_button.click()
+    accept_all_button = driver.find_element_by_xpath('/html/body/div[11]/div[1]/div[1]/div/button')
+    accept_all_button.click()
+    #----------------
     with open(input, 'r') as IPO_List:
         csv_reader = reader(IPO_List)
         with open(output, 'a') as dataframe:
