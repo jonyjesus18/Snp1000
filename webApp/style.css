@@ -1,0 +1,23 @@
+/* ==========================================
+    FOR DEMO PURPOSE
+  ========================================== */
+  body {
+    background: #2a2e32;
+  }
+  
+
+  .caption {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    color: azure;
+    font-size: 130%; 
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 3%;
+}
+
+.thumbnail {
+  position: relative;
+
+}
