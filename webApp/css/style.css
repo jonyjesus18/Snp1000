@@ -7,7 +7,7 @@
   
 
   .caption {
-    position: relative;
+    position: static;
     top: 10%;
     left: 0;
     width: 100%;
