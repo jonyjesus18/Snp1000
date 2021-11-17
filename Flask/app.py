@@ -1,9 +1,6 @@
 from flask import Flask
+myapp = Flask(__name__)
 
-app = Flask(__name__)
-
-@app.route('/hello')
-def helloIndex():
-    return 'Hello World from Python Flask!'
-
-app.run(host='0.0.0.0', port=8000)
+@myapp.route("/")
+def hello():
+    return "Hello Flask, on Azure App Service for Linux"
