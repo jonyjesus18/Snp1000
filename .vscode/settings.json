@@ -1,0 +1,4 @@
+{
+    "appService.deploySubpath": ".",
+    "appService.defaultWebAppToDeploy": "/subscriptions/5f3f61e8-e774-4a73-b207-5cd38c16683d/resourceGroups/jmjHoldings/providers/Microsoft.Web/sites/jmmjHoldings"
+}
