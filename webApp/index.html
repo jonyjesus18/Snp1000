@@ -29,7 +29,7 @@
 
     <!------------------------------------------------NavBar----------------------------------------------------------- -->
     <div class='container-fluid p-0' style="position: sticky; top:0; z-index: 1;">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
             <a class="navbar-brand" href="index.html"> JMJHoldings </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,25 +65,28 @@
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
         </nav>
     </div>
     <!-- //////////////////////////////////////////  Navbar End /////////////////////////////////////////////////////////-->
-    <div class = "container-fluid p-0">
-    <marquee behavior="scroll" direction="left" scrollamount="7" > 1 2 3
+    <marquee behavior="scroll" 
+        direction="left" 
+        scrollamount="7" 
+        class = 'container-fluid p-0 mb-0'
+        style = 'color:black' > 
+        New Article on Medium!
     </marquee>
-    </div>
 
-    <div class=" container-fluid p-0 d-none d-md-block">
+    <div class=" container-fluid p-0 d-none d-md-block m-0">
         <img src="images/pic1.jpg" style="width:100%;">
         <div class="centered p-0">Insights on finantial Markets <br>
             <p>By Joao Jesus</p>
         </div>
     </div>
 
-    <div class=" container-fluid p-0 d-md-none bg-success text-white ">
+    <div class=" container-fluid p-0 d-md-none bg-success text-white m-0 ">
         <div class="row p-0">
             <div class="card-body p-0">
                 <h5 class="card-title ml-4 pt-3">Technology based investing</h5>
@@ -143,13 +146,13 @@
         <div class="col-sm-4 p-2">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Cloud Computing</h5>
+                    <h5 class="card-title">NLP for tesla stock Tweets</h5>
                     <h6 class="card-text" style='font-style: italic'> 12th November 2021</h6>
 
-                    <p class="card-text">Companies are increasingly more aware of using data and processing it for
-                        decision making.
-                        In a 941B market, which companies display the best forecasts?</p>
-                    <a href="#" class="btn btn-primary">Check the research here</a>
+                    <p class="card-text">How to use sentiment analysis to track online engagement on specific stocks
+                        via the Twitter API V2
+                    </p>
+                    <a href="https://medium.com/@joaomariajesus/running-sentiment-analysis-via-twitter-api-v2-cb0187cc6dc8" class="btn btn-primary">Check the research here</a>
                 </div>
             </div>
         </div>
